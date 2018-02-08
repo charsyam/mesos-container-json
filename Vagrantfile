@@ -15,7 +15,6 @@ end
 base_dir = File.expand_path(File.dirname(__FILE__))
 conf = YAML.load_file(File.join(base_dir, "cluster.yml"))
 ninfos = gen_node_infos(conf)
-master_ip = "master_ip"
 
 ## vagrant plugins required:
 # vagrant-aws, vagrant-berkshelf, vagrant-omnibus, vagrant-hosts, vagrant-cachier
@@ -43,9 +42,9 @@ Vagrant.configure("2") do |config|
             sudo yum -y install chronos
             echo "1" > /var/lib/zookeeper/myid
             sudo bash
-            master_ip = `ip address`
-            echo 'MARATHON_MASTER="zk://${ninfo[:ip]}:2181/mesos"' >> /etc/default/marathon
-            echo 'MARATHON_ZK="zk://${ninfo[:ip]}:2181/marathon"' >> /etc/default/marathon
+            sed -i '/127.0.1.1/d' /etc/hosts
+            echo 'MARATHON_MASTER="zk://#{master_ip}:2181/mesos"' >> /etc/default/marathon
+            echo 'MARATHON_ZK="zk://#{master_ip}:2181/marathon"' >> /etc/default/marathon
             echo 'MARATHON_MESOS_USER="root"' >> /etc/default/marathon
             systemctl start zookeeper
             systemctl start mesos-master
@@ -72,6 +71,8 @@ Vagrant.configure("2") do |config|
             echo 'docker,mesos' > /etc/mesos-slave/containerizers
             echo "zk://#{master_ip}:2181/mesos" > /etc/mesos/zk
             sudo bash
+            sed -i '/127.0.1.1/d' /etc/hosts
+            sed -i '1 i\nameserver 127.0.0.1' /etc/resolv.conf
             systemctl stop  mesos-master
             systemctl disable  mesos-master
             systemctl start docker
