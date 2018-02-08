@@ -29,11 +29,11 @@
     "container": {
         "type": "DOCKER",
         "docker": {
-            "image": "stathyinc/java-spring:latest"
-        },
-        "network": "BRIDGE",
-        "portMappings": [
-        { "hostPort": 0, "containerPort": 8084, "servicePort": 12001 }
-        ]
+            "image": "stathyinc/java-spring:latest",
+            "network": "BRIDGE",
+            "portMappings": [
+                { "hostPort": 0, "containerPort": 0, "servicePort": 12001 }
+            ]
+        }
     }
 }

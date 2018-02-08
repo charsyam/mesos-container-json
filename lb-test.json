@@ -1,6 +1,6 @@
 {
     "id": "lb-test-0", 
-    "cmd": "while [ true ] ; do curl http://spring.acme.org:12001  ; sleep 5 ; done",
+    "cmd": "while [ true ] ; do curl http://marathon-lb.marathon.mesos:10002  ; sleep 5 ; done",
     "cpus": 0.1,
     "mem": 10.0,
     "instances": 1

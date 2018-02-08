@@ -8,7 +8,7 @@ slave_n: 2      # hostname will be slave1,slave2,…
 ##########################################
 master_mem : 1024
 master_cpus: 2
-slave_mem  : 1024
+slave_mem  : 4096
 slave_cpus : 2
 
 # private ip bases

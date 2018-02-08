@@ -74,8 +74,8 @@ Vagrant.configure("2") do |config|
             sudo bash
             systemctl stop  mesos-master
             systemctl disable  mesos-master
-            systemctl start mesos-slave
             systemctl start docker
+            systemctl start mesos-slave
             SHELL
         end
       end
