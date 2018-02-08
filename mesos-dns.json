@@ -1,0 +1,26 @@
+{
+    "cmd": "./mesos-dns-v0.6.0-linux-amd64 -config=mesos-dns-config.json",
+    "cpus": 0.2,
+    "mem": 256,
+    "id": "mesos-dns",
+    "instances": 1,
+    "constraints": [["hostname", "UNIQUE"]],
+    "healthChecks": [
+        {
+            "protocol": "HTTP",
+            "path": "/v1/version",
+            "port": 8123
+        }
+    ],
+    "fetch": [
+        {
+            "uri": "https://github.com/mesosphere/mesos-dns/releases/download/v0.6.0/mesos-dns-v0.6.0-linux-amd64",
+            "executable": true
+        },
+        {
+            "uri": "https://raw.githubusercontent.com/charsyam/mesos-container-json/master/mesos-dns-config.json",
+            "executable": false
+        }
+    ]
+}
+

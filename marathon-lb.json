@@ -3,7 +3,7 @@
     "args": [
         "sse",
         "-m",
-        "http://localhost:8080",
+        "http://172.31.1.11:8080",
         "--group",
         "external"
     ],
